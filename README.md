@@ -40,15 +40,57 @@ futures-script-optimizer/
 
 ## 三、使用方式
 
-### 3.1 作为 Skill 使用
+### 3.1 安装（部署为本地 Skill）
 
-将 `SKILL.md` 及 `references/`、`evals/` 目录部署到 Agent Skills 环境（用户级 `~/.workbuddy/skills/` 或项目级 `{workspace}/.workbuddy/skills/`）。Skill 加载后会：
+本 Skill 遵循 Agent Skills 开放格式，安装只需把整个目录放到指定位置即可，**无需编译、无需依赖**。
 
-1. 读取脚本原稿；
-2. 按 `SKILL.md` 流程执行「诊断 → 案例检索 → Hook 选择 → 改写 → 合规初审 → 自检」；
-3. 输出优化稿 + 修改理由 + 合规结论（含需人工复核项）。
+**方式 A：git clone（推荐，可同步更新）**
 
-### 3.2 运行测试
+```bash
+# 1. 克隆到本地 skills 目录（用户级，对所有项目生效）
+git clone git@github.com:yidan-lau/futures-script-optimizer.git ~/.workbuddy/skills/futures-script-optimizer
+
+# 2.（可选）只想在当前项目内生效，改放项目级目录
+git clone git@github.com:yidan-lau/futures-script-optimizer.git <你的项目>/.workbuddy/skills/futures-script-optimizer
+```
+
+**方式 B：下载 ZIP（无需 git）**
+
+1. 打开仓库页面 → 绿色 `Code` 按钮 → `Download ZIP`。
+2. 解压后，把整个 `futures-script-optimizer` 文件夹复制到：
+   - 用户级：`~/.workbuddy/skills/futures-script-optimizer`（Windows 为 `C:\Users\<你的用户名>\.workbuddy\skills\futures-script-optimizer`）
+   - 项目级：`<你的项目>/.workbuddy/skills/futures-script-optimizer`
+
+**安装后更新（仅方式 A 适用）**
+
+```bash
+cd ~/.workbuddy/skills/futures-script-optimizer
+git pull
+```
+
+### 3.2 使用示例
+
+安装后，在 WorkBuddy 对话中用自然语言即可触发，无需记命令。
+
+**示例 1：脚本优化**
+
+> 帮我优化这个期货开户脚本：〔粘贴代理商初版口播脚本〕
+
+Skill 会按「诊断 → 合规初审 → 案例检索 → 改写 → 合规复审 → 输出」流程，输出：
+- 优化稿（按【钩子】【内容】【转化】三段，钩子给两版备选）
+- 需要注意和确认的事项
+
+**示例 2：合规初审（不改写）**
+
+> 对这段口播文案做合规初审，只查合规问题，不用改写：〔粘贴脚本〕
+
+**示例 3：改写 Hook**
+
+> 把这段脚本的开头 Hook 改成痛点式，给我两个备选：〔粘贴脚本〕
+
+**触发关键词**：跑量脚本、脚本优化、口播改写、合规初审、Hook 改写、开户脚本、期货营销文案。
+
+### 3.3 运行测试
 
 参见 `evals/README.md`。核心思路：
 
