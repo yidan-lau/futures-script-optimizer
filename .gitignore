@@ -1,0 +1,61 @@
+# ============================================================
+# futures-script-optimizer .gitignore
+# 说明：避免误提交临时文件、凭据、本地配置与公司内部原始资料
+# ============================================================
+
+# ---- 公司内部原始资料（严禁提交） ----
+# 原始 xlsx / xls / docx 等业务资料属于公司内部数据，一律不入仓库
+*.xlsx
+*.xls
+*.docx
+*.doc
+*.wps
+*.et
+
+# 如果确有需要保留的样例，仅放脱敏后的 markdown，原始文件不进库
+
+# ---- 凭据 / 密钥 / 令牌 ----
+*.env
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+credentials*
+secrets*
+*.token
+.aws/
+.gcloud/
+
+# ---- 本地配置 / IDE ----
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- 临时 / 缓存 / 日志 ----
+*.tmp
+*.temp
+*.log
+*.bak
+*.orig
+__pycache__/
+*.pyc
+*.pyo
+.cache/
+dist/
+build/
+node_modules/
+
+# ---- 测试结果临时产物（正式结果如需保留请显式 git add） ----
+evals/results/*
+!evals/results/.gitkeep
+
+# ---- 本地工作目录（按需取消注释） ----
+# local/
+# workspace/
